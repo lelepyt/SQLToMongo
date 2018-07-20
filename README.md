@@ -1,4 +1,7 @@
 # SQLToMongo
+
+[![Build Status](https://travis-ci.org/lelepyt/SQLToMongo.svg?branch=master)](https://travis-ci.org/lelepyt/SQLToMongo)
+
 Simple tool which converts SQL select queries to Mongo results. 
 
 ## Set up
