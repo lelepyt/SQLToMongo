@@ -92,19 +92,19 @@ public class MongoCollectionParser {
         }
 
         mongoCollectionMatrix = checkIfWhereHasOperatorsAndProcess(matrixWithAllElement, tableName, whatSelect, mongoCollectionMatrix);
-
+        // If query has Order By then process it
         if (queryDataSQL.getOrderBy()!= null && !queryDataSQL.getOrderBy().isEmpty()) {
             mongoCollectionMatrix = sotrMatrixForOrderBy(mongoCollectionMatrix, queryDataSQL.getOrderBy(), queryDataSQL.getOrderByForAscOrDesc());
         }
         mongoCollectionArray = convertElementsFromMatrixInArray(mongoCollectionMatrix, mongoCollectionArray, queryDataSQL.getSelect());
-
+        // If query has Skip then process it
         if (queryDataSQL.getSkip() != null && !queryDataSQL.getSkip().isEmpty()) {
             mongoCollectionArray = parseArrayForSkip(mongoCollectionArray, queryDataSQL.getSkip());
         }
+        // If query has Limit then process it
         if (queryDataSQL.getLimit() != null && !queryDataSQL.getLimit().isEmpty()) {
             mongoCollectionArray = parseArrayForLimit(mongoCollectionArray, queryDataSQL.getLimit());
         }
-
         if (queryDataSQL.getLimit() == null && queryDataSQL.getSkip() == null
                 && queryDataSQL.getOrderBy() == null && queryDataSQL.getSelect().equals("*")) {
             mongoQueryResult.setMongoCollectionMatrix(mongoCollectionMatrix);
